@@ -106,9 +106,9 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
 
--- Optional: seed a few events (run if you want starter data)
--- insert into public.events (name, date, time, location) values
---   ('Spring Band Concert', '2025-03-15', '6:00 PM', 'Main Auditorium'),
---   ('Science Fair', '2025-03-22', '2:00 PM', 'Gym & Cafeteria'),
---   ('Field Day', '2025-04-05', '9:00 AM', 'Sports Field'),
---   ('Parent-Teacher Night', '2025-04-12', '5:30 PM', 'Classrooms');
+-- Optional: seed a few events (run once in SQL Editor if you want starter data)
+-- insert into public.events (name, date, time, end_time, location) values
+--   ('Spring Band Concert', '2025-03-15', '6:00 PM', '', 'Main Auditorium'),
+--   ('Science Fair', '2025-03-22', '2:00 PM', '', 'Gym & Cafeteria'),
+--   ('Field Day', '2025-04-05', '9:00 AM', '', 'Sports Field'),
+--   ('Parent-Teacher Night', '2025-04-12', '5:30 PM', '', 'Classrooms');

@@ -7,11 +7,12 @@ A simple website that matches **drivers** (parents or volunteers) with **student
 - **Upcoming events** — View school events (concerts, science fair, field day, etc.).
 - **Drivers** — Offer a ride: name, phone, event, number of seats, optional notes.
 - **Students** — Request a ride: name, phone, event, pickup area, optional notes.
-- **Matches** — On the Matches tab, connect a driver with a student for an event. Each match uses one seat from the driver.
-- **Sign in / Sign up** — Optional. When signed in, your details autofill on ride forms and you can see **My rides** (your offers and requests only).
+- **Sign in / Sign up** — Optional. When signed in, your details autofill on ride forms and you can see **My rides**.
+- **My rides** — View your ride offers and requests, and connect drivers with students for each event. Each match uses one seat from the driver.
+- **AI auto-assign** — The day before an event, AI can auto-assign students to drivers based on proximity and available seats (requires Gemini API key).
 
 **Without Supabase:** Data is in memory and sign-in uses localStorage. Refreshing clears events/drivers/students/matches but keeps accounts.  
-**With Supabase:** Login and all ride data (events, drivers, students, matches) are stored in Supabase and persist across devices and refreshes.
+**With Supabase:** Login and all ride data are stored in the same Supabase database: **events** (name, date, time, location), **drivers** and **students** (signups per event), and **matches**. Data persists across devices and refreshes.
 
 ## How to run
 
@@ -50,11 +51,23 @@ To persist login and ride data in Supabase:
    window.RIDEMATCH_SUPABASE_ANON_KEY = 'your-anon-key';
    ```
 
-3. **Create the database tables** in the Supabase **SQL Editor** by running the contents of `supabase-setup.sql` (creates `profiles`, `events`, `drivers`, `students`, `matches` and RLS policies).
+3. **Create the database tables** — In the Supabase dashboard go to **SQL Editor** → **New query**, paste the **entire** contents of `supabase-setup.sql`, and click **Run**. This creates `profiles`, `events`, `drivers`, `students`, `matches` and RLS policies. If you see *"could not find the table 'public.events' in the schema cache"*, the tables were not created; run the full script in the same project where your API keys point.
 
 4. **(Optional)** In **Authentication → Providers**, turn off “Confirm email” if you want sign-in without email verification for testing.
 
 After that, the app will use Supabase for auth and for all events, drivers, students, and matches.
+
+## Gemini AI auto-assign (optional)
+
+The day before an event, the app can use Google Gemini AI to auto-assign students to drivers based on proximity (pickup/driver notes) and available seats.
+
+1. Get a free API key at [Google AI Studio](https://aistudio.google.com/apikey).
+2. Add it to `config.js`:
+   ```js
+   window.RIDEMATCH_GEMINI_API_KEY = 'your-gemini-api-key';
+   ```
+3. On the event page (when the event is tomorrow), an **Auto-assign with AI** button appears. Click it to run the assignment.
+4. Assigned matches appear in **My rides** for both drivers and students.
 
 ## Tech
 

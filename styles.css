@@ -755,6 +755,74 @@ body {
   padding: 1.5rem;
 }
 
+.auto-assign-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: var(--radius);
+}
+.auto-assign-bar p {
+  margin: 0;
+  flex: 1;
+  font-size: 0.95rem;
+}
+.auto-assign-success {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.auth-error {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background: color-mix(in srgb, var(--error, #dc3545) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--error, #dc3545) 40%, transparent);
+  border-radius: var(--radius);
+  color: var(--error, #dc3545);
+  font-size: 0.9rem;
+}
+
+.time-input-wrap {
+  position: relative;
+}
+.time-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.25rem;
+  max-height: 12rem;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  display: none;
+}
+.time-dropdown.visible {
+  display: block;
+}
+.time-option {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.time-option:hover,
+.time-option:focus {
+  background: var(--surface-elevated);
+}
+
 .auth-form .form-group {
   margin-bottom: 1rem;
 }
